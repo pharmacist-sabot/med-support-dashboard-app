@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard รายงานมูลค่ายาสนับสนุน</title>
+
+    <!-- External Libraries -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Chart.js for beautiful charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    
+    <!-- Local Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- ======================= HEADER ======================= -->
+        <header class="dashboard-header">
+            <div class="header-title">
+                <i class="fas fa-chart-pie"></i>
+                <h1>Dashboard รายงานมูลค่ายาสนับสนุน</h1>
+            </div>
+            <div class="header-actions">
+                <p class="current-date" id="currentDate"></p>
+                <button class="action-button" id="exportCsvButton">
+                  <i class="fas fa-file-download"></i>
+                  Export to CSV
+                </button>
+            </div>
+        </header>
+
+        <!-- ======================= MAIN CONTENT GRID ======================= -->
+        <main class="dashboard-grid">
+
+            <!-- Key Metrics Section -->
+            <div class="grid-card card-kpi" id="kpiTotalValue">
+                <div class="kpi-icon"><i class="fas fa-coins"></i></div>
+                <div class="kpi-text">
+                    <p>มูลค่ารวมทั้งหมด</p>
+                    <h2 class="loading-text">Loading...</h2>
+                </div>
+            </div>
+
+            <div class="grid-card card-kpi" id="kpiTotalTransactions">
+                <div class="kpi-icon"><i class="fas fa-receipt"></i></div>
+                <div class="kpi-text">
+                    <p>จำนวนรายการทั้งหมด</p>
+                    <h2 class="loading-text">Loading...</h2>
+                </div>
+            </div>
+
+            <div class="grid-card card-kpi" id="kpiAvgValue">
+                <div class="kpi-icon"><i class="fas fa-calculator"></i></div>
+                <div class="kpi-text">
+                    <p>มูลค่าเฉลี่ยต่อรายการ</p>
+                    <h2 class="loading-text">Loading...</h2>
+                </div>
+            </div>
+
+            <!-- Quarterly Report Section -->
+            <div class="grid-card card-full-width card-quarterly">
+                <div class="card-header">
+                <h3><i class="fas fa-calendar-alt"></i> สรุปรายไตรมาส (ปีงบประมาณ)</h3>
+                <div class="year-selector-wrapper">
+                <label for="yearSelector">เลือกปีงบประมาณ:</label>
+                <select id="yearSelector"></select>
+                </div>
+                </div>
+                <div class="quarter-container">
+                    <div class="quarter-item" id="q1">
+                        <p>ไตรมาส 1 (ต.ค. - ธ.ค.)</p>
+                        <h4 class="loading-text">Loading...</h4>
+                    </div>
+                    <div class="quarter-item" id="q2">
+                        <p>ไตรมาส 2 (ม.ค. - มี.ค.)</p>
+                        <h4 class="loading-text">Loading...</h4>
+                    </div>
+                    <div class="quarter-item" id="q3">
+                        <p>ไตรมาส 3 (เม.ย. - มิ.ย.)</p>
+                        <h4 class="loading-text">Loading...</h4>
+                    </div>
+                    <div class="quarter-item" id="q4">
+                        <p>ไตรมาส 4 (ก.ค. - ก.ย.)</p>
+                        <h4 class="loading-text">Loading...</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drug Type Distribution -->
+            <div class="grid-card card-chart">
+                 <h3><i class="fas fa-pills"></i> สัดส่วนมูลค่าตามประเภทยา</h3>
+                 <div class="chart-container">
+                    <canvas id="drugTypeChart"></canvas>
+                 </div>
+            </div>
+            
+            <!-- Recent Transactions Table -->
+            <div class="grid-card card-table">
+                <h3><i class="fas fa-history"></i> รายการล่าสุด</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>วันที่</th>
+                                <th>เลขที่บิล</th>
+                                <th>ประเภท</th>
+                                <th class="text-right">มูลค่า (บาท)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentTransactionsBody">
+                            <!-- Data will be injected by JavaScript -->
+                            <tr><td colspan="4" class="loading-text-table">Loading data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Supabase Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Local JavaScript -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

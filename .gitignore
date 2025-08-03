@@ -1,0 +1,7 @@
+# .gitignore
+
+# Ignore Supabase config file
+config.js
+
+# Ignore node modules folder if any
+node_modules/
