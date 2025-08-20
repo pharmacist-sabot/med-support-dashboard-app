@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "med-support-dashboard"
-  }
+    "default": "med-support-dashboard",
+    "med-support-dashboard": "med-support-dashboard"
+  },
+  "targets": {},
+  "etags": {}
 }
